@@ -33,6 +33,11 @@ public class UrlConstructor {
 		return url;
 	}
 	
+	public String DNPRC() {
+		String url = URL_CALLEJERO + "/Consulta_DNPRC";
+		sop(url);
+		return url;
+	}
 	public String DNPLOC() {
 		String url = URL_CALLEJERO + "/Consulta_DNPLOC";
 		sop(url);

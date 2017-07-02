@@ -53,6 +53,12 @@ public class UrlConstructorTest {
 	}
 	
 	@Test
+	public void testUrlDNPRC() {
+		String urlDNPRC = url.DNPRC();
+		
+		assertEquals(urlDNPRC, "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPRC");
+	}
+	@Test
 	public void testUrlDNPLOC() {
 		UrlConstructor url = new UrlConstructor();
 		String urlDNPLOC = url.DNPLOC();
