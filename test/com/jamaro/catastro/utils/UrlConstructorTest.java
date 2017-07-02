@@ -32,14 +32,13 @@ public class UrlConstructorTest {
 	
 	@Test
 	public void testUrlProvincias(){
-		UrlConstructor url = new UrlConstructor();
 		String urlProvincias = url.provincias();
+		
 		assertEquals(urlProvincias,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaProvincia");
 	}
 	
 	@Test
 	public void testUrlMunicipios(){
-		UrlConstructor url = new UrlConstructor();
 		String urlMunicipios = url.municipios();
 		
 		assertEquals(urlMunicipios,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaMunicipio");
@@ -60,7 +59,6 @@ public class UrlConstructorTest {
 	}
 	@Test
 	public void testUrlDNPLOC() {
-		UrlConstructor url = new UrlConstructor();
 		String urlDNPLOC = url.DNPLOC();
 		
 		assertEquals(urlDNPLOC,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPLOC");
@@ -68,7 +66,6 @@ public class UrlConstructorTest {
 	
 	@Test
 	public void testUrlVia() {
-		UrlConstructor url = new UrlConstructor();
 		String urlVia = url.via();
 		
 		assertEquals(urlVia, "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaVia");
@@ -76,10 +73,27 @@ public class UrlConstructorTest {
 	
 	@Test
 	public void testUrlNumero() {
-		UrlConstructor url = new UrlConstructor();
 		String urlNumero = url.numero();
 		
 		assertEquals(urlNumero, "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaNumero");
 	}
 
+	@Test
+	public void testUrlRCCOOR_Distancia() {
+		String urlRCCOOR_Distancia = url.RCCOOR_Distancia();
+		
+		assertEquals(urlRCCOOR_Distancia,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCoordenadas.asmx/Consulta_RCCOOR_Distancia");
+	}
+	@Test
+	public void testUrlRCCOOR() {
+		String urlRCCOOR = url.RCCOOR();
+		
+		assertEquals(urlRCCOOR,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCoordenadas.asmx/Consulta_RCCOOR");
+	}	
+	@Test
+	public void testUrlCPMRC() {
+		String urlCPMRC = url.CPMRC();
+		
+		assertEquals(urlCPMRC, "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCoordenadas.asmx/Consulta_CPMRC");
+	}
 }

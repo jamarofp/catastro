@@ -6,7 +6,7 @@ public class UrlConstructor {
 	static final String URL_CATASTRO = "https://www1.sedecatastro.gob.es/";
 	static final String URL_MAP = URL_CATASTRO + "Cartografia/mapa.aspx?refcat=";
 	static final String URL_CALLEJERO = "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx";
-	
+	static final String URL_COORDENADAS = "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCoordenadas.asmx";
 	
 	
 	public String map(String pc1, String pc2) {
@@ -52,6 +52,23 @@ public class UrlConstructor {
 	
 	public String numero(){
 		String url = URL_CALLEJERO + "/ConsultaNumero";
+		sop(url);
+		return url;
+	}
+	
+	public String RCCOOR_Distancia() {
+		String url = URL_COORDENADAS + "/Consulta_RCCOOR_Distancia";
+		sop(url);
+		return url;
+	}
+	
+	public String RCCOOR() {
+		String url = URL_COORDENADAS + "/Consulta_RCCOOR";
+		sop(url);
+		return url;
+	}	
+	public String CPMRC() {
+		String url = URL_COORDENADAS + "/Consulta_CPMRC";
 		sop(url);
 		return url;
 	}
