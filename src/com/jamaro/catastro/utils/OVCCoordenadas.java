@@ -16,9 +16,22 @@ public class OVCCoordenadas {
 	static final String SRS_GOOGLEMAPS = "EPSG:4326";
 	private String coords;
 	private String srs;
+	private String provincia;
+	private String municipio;
+	private String referencia_catastral;
 
 	public OVCCoordenadas() {
 
+	}
+	
+	public OVCCoordenadas(String coords) {
+		this.coords = coords;
+	}
+	
+	public OVCCoordenadas(String provincia, String municipio, String rc) {
+		this.provincia = provincia;
+		this.municipio = municipio;
+		this.referencia_catastral = rc;
 	}
 
 	public String setCoords(String coords) {
@@ -43,6 +56,8 @@ public class OVCCoordenadas {
 		String result = urlReader.getContent();
 		String txtResult = "";
 
+		Inmueble inmueble = new Inmueble();
+		
 		try {
 			// https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -50,7 +65,7 @@ public class OVCCoordenadas {
 			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(result.getBytes("utf-8"))));
 			doc.getDocumentElement().normalize();
 			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			NodeList nList = doc.getElementsByTagName("coordenadas");
+			NodeList nList = doc.getElementsByTagName("coordenadas");//pcd");
 			System.out.println("----------------------------");
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
@@ -69,13 +84,80 @@ public class OVCCoordenadas {
 					txtResult += "ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent() + "\n";
 					txtResult += "ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent() + "\n";
 					
+					inmueble.setpc1(eElement.getElementsByTagName("pc1").item(0).getTextContent());
+					inmueble.setpc2(eElement.getElementsByTagName("pc2").item(0).getTextContent());
+					inmueble.setxcen(eElement.getElementsByTagName("xcen").item(0).getTextContent());
+					inmueble.setycen(eElement.getElementsByTagName("ycen").item(0).getTextContent());
+					inmueble.setldt(eElement.getElementsByTagName("ldt").item(0).getTextContent());
+					
+					
+					
 					
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println(inmueble.toString());
+		System.out.println("------------------------------------------------------------------------");
+		return txtResult;
+	}
 
+	public String getCPMRC() {
+		UrlConstructor urlConstructor = new UrlConstructor();
+		String stUrl = urlConstructor.CPMRC();
+		srs = (this.srs == null) ? SRS_GOOGLEMAPS : this.srs;
+		stUrl += "?Provincia=" + this.provincia + "&Municipio=" + this.municipio + "&SRS=" + srs + "&RC=" + this.referencia_catastral;
+		System.out.println(stUrl);
+		UrlReader urlReader = new UrlReader(stUrl);
+
+		String result = urlReader.getContent();
+		String txtResult = "";
+		
+		Inmueble inmueble = new Inmueble();
+
+		try {
+			// https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(result.getBytes("utf-8"))));
+			doc.getDocumentElement().normalize();
+			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+			NodeList nList = doc.getElementsByTagName("coordenadas");//pcd");
+			System.out.println("----------------------------");
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				System.out.println("\nCurrent Element :" + nNode.getNodeName());
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					System.out.println("pc1 : " + eElement.getElementsByTagName("pc1").item(0).getTextContent());
+					System.out.println("pc2 : " + eElement.getElementsByTagName("pc2").item(0).getTextContent());
+					System.out.println("xcen : " + eElement.getElementsByTagName("xcen").item(0).getTextContent());
+					System.out.println("ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent());
+					System.out.println("ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent());
+					
+					txtResult += "pc1 : " + eElement.getElementsByTagName("pc1").item(0).getTextContent() + "\n";
+					txtResult += "pc2 : " + eElement.getElementsByTagName("pc2").item(0).getTextContent() + "\n";
+					txtResult += "xcen : " + eElement.getElementsByTagName("xcen").item(0).getTextContent() + "\n";
+					txtResult += "ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent() + "\n";
+					txtResult += "ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent() + "\n";
+					
+					inmueble.setpc1(eElement.getElementsByTagName("pc1").item(0).getTextContent());
+					inmueble.setpc2(eElement.getElementsByTagName("pc2").item(0).getTextContent());
+					inmueble.setxcen(eElement.getElementsByTagName("xcen").item(0).getTextContent());
+					inmueble.setycen(eElement.getElementsByTagName("ycen").item(0).getTextContent());
+					inmueble.setldt(eElement.getElementsByTagName("ldt").item(0).getTextContent());
+					
+					
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println(inmueble.toString());
+		System.out.println("------------------------------------------------------------------------");
 		return txtResult;
 	}
 
