@@ -31,6 +31,23 @@ public class UrlConstructor {
 		return url;
 	}
 	
+	public String via(){
+		String url = URL_CALLEJERO + "/ConsultaVia";
+		sop(url);
+		return url;
+	}
+	
+	public String numero(){
+		String url = URL_CALLEJERO + "/ConsultaNumero";
+		sop(url);
+		return url;
+	}
+	
+	
+	
+	
+	
+	
 	private void sop(String st){
 		System.out.println(st);
 	}

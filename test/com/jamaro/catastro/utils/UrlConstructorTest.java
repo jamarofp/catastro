@@ -49,5 +49,21 @@ public class UrlConstructorTest {
 		
 		assertEquals(urlDNPLOC,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPLOC");
 	}
+	
+	@Test
+	public void testUrlVia() {
+		UrlConstructor url = new UrlConstructor();
+		String urlVia = url.via();
+		
+		assertEquals(urlVia, "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaVia");
+	}
+	
+	@Test
+	public void testUrlNumero() {
+		UrlConstructor url = new UrlConstructor();
+		String urlNumero = url.numero();
+		
+		assertEquals(urlNumero, "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaNumero");
+	}
 
 }
