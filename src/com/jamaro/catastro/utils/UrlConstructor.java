@@ -1,7 +1,7 @@
 package com.jamaro.catastro.utils;
 
 public class UrlConstructor {
-	static final boolean DEBUG = true;
+	static final boolean DEBUG = false;
 	
 	static final String URL_CATASTRO = "https://www1.sedecatastro.gob.es/";
 	static final String URL_MAP = URL_CATASTRO + "Cartografia/mapa.aspx?refcat=";
