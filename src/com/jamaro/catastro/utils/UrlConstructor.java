@@ -1,6 +1,8 @@
 package com.jamaro.catastro.utils;
 
 public class UrlConstructor {
+	static final boolean DEBUG = true;
+	
 	static final String URL_CATASTRO = "https://www1.sedecatastro.gob.es/";
 	static final String URL_MAP = URL_CATASTRO + "Cartografia/mapa.aspx?refcat=";
 	static final String URL_CALLEJERO = "http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx";
@@ -21,6 +23,12 @@ public class UrlConstructor {
 	
 	public String municipios() {
 		String url = URL_CALLEJERO + "/ConsultaMunicipio";
+		sop(url);
+		return url;
+	}
+	
+	public String DNPPP() {
+		String url = URL_CALLEJERO + "/Consulta_DNPPP";
 		sop(url);
 		return url;
 	}
@@ -49,7 +57,9 @@ public class UrlConstructor {
 	
 	
 	private void sop(String st){
-		System.out.println(st);
+		if (DEBUG) {
+			System.out.println(st);
+		}
 	}
 
 }

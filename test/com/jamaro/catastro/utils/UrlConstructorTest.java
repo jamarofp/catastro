@@ -7,9 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class UrlConstructorTest {
+	
+	private UrlConstructor url;
 
 	@Before
 	public void setUp() throws Exception {
+		this.url = new UrlConstructor();
 	}
 
 	@After
@@ -40,6 +43,13 @@ public class UrlConstructorTest {
 		String urlMunicipios = url.municipios();
 		
 		assertEquals(urlMunicipios,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaMunicipio");
+	}
+	
+	@Test
+	public void testUrlDNPPP() {
+		String urlDNPPP = url.DNPPP();
+		
+		assertEquals(urlDNPPP,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPPP");
 	}
 	
 	@Test
