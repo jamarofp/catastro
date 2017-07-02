@@ -31,7 +31,23 @@ public class UrlConstructorTest {
 	public void testUrlProvincias(){
 		UrlConstructor url = new UrlConstructor();
 		String urlProvincias = url.provincias();
-		assertEquals(urlProvincias,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx?op=ConsultaProvincia");
+		assertEquals(urlProvincias,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaProvincia");
+	}
+	
+	@Test
+	public void testUrlMunicipios(){
+		UrlConstructor url = new UrlConstructor();
+		String urlMunicipios = url.municipios();
+		
+		assertEquals(urlMunicipios,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/ConsultaMunicipio");
+	}
+	
+	@Test
+	public void testUrlDNPLOC() {
+		UrlConstructor url = new UrlConstructor();
+		String urlDNPLOC = url.DNPLOC();
+		
+		assertEquals(urlDNPLOC,"http://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPLOC");
 	}
 
 }
