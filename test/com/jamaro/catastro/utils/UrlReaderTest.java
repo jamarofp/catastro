@@ -32,17 +32,26 @@ public class UrlReaderTest {
 		System.out.println("--- PuertaDelSolMadrid ---");
 		String coords = "40.416546, -3.703758";
 		OVCCoordenadas ovc = new OVCCoordenadas(coords);
-		String resultRCOOR = ovc.getRCCOOR();
+		Inmueble resultRCOOR = ovc.getRCCOOR();
 
-		assertEquals(resultRCOOR,"pc1 : 0444101\npc2 : VK4704C\nxcen : -3.703758\nycen : 40.416546\nldt : PZ PUERTA DEL SOL 7 MADRID (MADRID)\n");
+		assertEquals(resultRCOOR.getpc1(),"0444101");
+		assertEquals(resultRCOOR.getpc2(),"VK4704C");
+		assertEquals(resultRCOOR.getxcen(),"-3.703758");
+		assertEquals(resultRCOOR.getycen(),"40.416546");
+		assertEquals(resultRCOOR.getldt(),"PZ PUERTA DEL SOL 7 MADRID (MADRID)");
+		
 		
 		System.out.println("--- AytoValencia ---");
 		coords = "39.469771, -0.377021";
 		ovc.setCoords(coords);		
+
 		resultRCOOR = ovc.getRCCOOR();
 		
-		assertEquals(resultRCOOR,"pc1 : 5724701\npc2 : YJ2752D\nxcen : -0.377021\nycen : 39.469771\nldt : PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)\n");
-
+		assertEquals(resultRCOOR.getpc1(),"5724701");
+		assertEquals(resultRCOOR.getpc2(),"YJ2752D");
+		assertEquals(resultRCOOR.getxcen(),"-0.377021");
+		assertEquals(resultRCOOR.getycen(),"39.469771");
+		assertEquals(resultRCOOR.getldt(),"PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)");
 	}
 	
 	@Test
@@ -53,10 +62,13 @@ public class UrlReaderTest {
 		String municipio = "VALENCIA";
 		OVCCoordenadas ovc = new OVCCoordenadas(provincia, municipio, rc);
 		
-		String resultCPMRC = ovc.getCPMRC();
+		Inmueble resultCPMRC = ovc.getCPMRC();
 		
-		assertEquals(resultCPMRC,"pc1 : 5724701\npc2 : YJ2752D\nxcen : -0.376977278911663\nycen : 39.4697979017582\nldt : PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)\n");
-		
+		assertEquals(resultCPMRC.getpc1(),"5724701");
+		assertEquals(resultCPMRC.getpc2(),"YJ2752D");
+		assertEquals(resultCPMRC.getxcen(),"-0.376977278911663");
+		assertEquals(resultCPMRC.getycen(),"39.4697979017582");
+		assertEquals(resultCPMRC.getldt(),"PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)");
 	}
 	
 

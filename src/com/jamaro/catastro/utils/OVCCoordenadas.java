@@ -44,7 +44,7 @@ public class OVCCoordenadas {
 		return this.srs;
 	}
 
-	public String getRCCOOR() {
+	public Inmueble getRCCOOR() {
 		UrlConstructor urlConstructor = new UrlConstructor();
 		String stUrl = urlConstructor.RCCOOR();
 		String coords = this.coords.replace(" ", "");
@@ -101,10 +101,11 @@ public class OVCCoordenadas {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println(inmueble.toString());
 		System.out.println("------------------------------------------------------------------------");
-		return txtResult;
+		//return txtResult;
+		return inmueble;
 	}
 
-	public String getCPMRC() {
+	public Inmueble getCPMRC() {
 		UrlConstructor urlConstructor = new UrlConstructor();
 		String stUrl = urlConstructor.CPMRC();
 		srs = (this.srs == null) ? SRS_GOOGLEMAPS : this.srs;
@@ -158,7 +159,8 @@ public class OVCCoordenadas {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println(inmueble.toString());
 		System.out.println("------------------------------------------------------------------------");
-		return txtResult;
+		//return txtResult;
+		return inmueble;
 	}
 
 }
