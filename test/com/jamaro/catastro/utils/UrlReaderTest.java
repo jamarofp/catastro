@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.List;
 
 import javax.xml.parsers.*;
 
@@ -32,26 +33,55 @@ public class UrlReaderTest {
 		System.out.println("--- PuertaDelSolMadrid ---");
 		String coords = "40.416546, -3.703758";
 		OVCCoordenadas ovc = new OVCCoordenadas(coords);
-		Inmueble resultRCOOR = ovc.getRCCOOR();
+		Inmueble resultRCCOOR = ovc.getRCCOOR();
 
-		assertEquals(resultRCOOR.getpc1(),"0444101");
-		assertEquals(resultRCOOR.getpc2(),"VK4704C");
-		assertEquals(resultRCOOR.getxcen(),"-3.703758");
-		assertEquals(resultRCOOR.getycen(),"40.416546");
-		assertEquals(resultRCOOR.getldt(),"PZ PUERTA DEL SOL 7 MADRID (MADRID)");
+		assertEquals(resultRCCOOR.getpc1(),"0444101");
+		assertEquals(resultRCCOOR.getpc2(),"VK4704C");
+		assertEquals(resultRCCOOR.getxcen(),"-3.703758");
+		assertEquals(resultRCCOOR.getycen(),"40.416546");
+		assertEquals(resultRCCOOR.getldt(),"PZ PUERTA DEL SOL 7 MADRID (MADRID)");
 		
 		
 		System.out.println("--- AytoValencia ---");
 		coords = "39.469771, -0.377021";
 		ovc.setCoords(coords);		
 
-		resultRCOOR = ovc.getRCCOOR();
+		resultRCCOOR = ovc.getRCCOOR();
 		
-		assertEquals(resultRCOOR.getpc1(),"5724701");
-		assertEquals(resultRCOOR.getpc2(),"YJ2752D");
-		assertEquals(resultRCOOR.getxcen(),"-0.377021");
-		assertEquals(resultRCOOR.getycen(),"39.469771");
-		assertEquals(resultRCOOR.getldt(),"PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)");
+		assertEquals(resultRCCOOR.getpc1(),"5724701");
+		assertEquals(resultRCCOOR.getpc2(),"YJ2752D");
+		assertEquals(resultRCCOOR.getxcen(),"-0.377021");
+		assertEquals(resultRCCOOR.getycen(),"39.469771");
+		assertEquals(resultRCCOOR.getldt(),"PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)");
+		
+		System.out.println("--- Burguer King Ayto Valencia ---");
+		coords = "39.470586, -0.375960";
+		ovc.setCoords(coords);
+		
+		resultRCCOOR = ovc.getRCCOOR();
+		
+		assertEquals(resultRCCOOR.getpc1(),"5825704");
+	}
+	
+	@Test
+	public void testOVCCoordenadas_getRCCOOR_Distancia() {
+		System.out.println("--- Distancia coordenadas Burguer King Ayto. Valencia ---");
+		String coords = "39.470586, -0.375960";
+		
+		OVCCoordenadas ovc = new OVCCoordenadas(coords);
+		List<Inmueble> resultRCCOOR = ovc.getRCCOOR_Distancia();
+
+		assertEquals(resultRCCOOR.size(),3);
+
+		
+		assertEquals(resultRCCOOR.get(0).getpc1(),"5825704");
+		assertEquals(resultRCCOOR.get(1).getpc1(),"5825703");
+		assertEquals(resultRCCOOR.get(2).getpc1(),"5825705");
+		
+		assertEquals(resultRCCOOR.get(0).getldt(),"PZ AYUNTAMIENTO DEL 19 VALENCIA (VALENCIA)");
+		assertEquals(resultRCCOOR.get(1).getldt(),"CL MORATIN 14 VALENCIA (VALENCIA)");
+		assertEquals(resultRCCOOR.get(2).getldt(),"PZ AYUNTAMIENTO DEL 18 VALENCIA (VALENCIA)");
+		
 	}
 	
 	@Test
@@ -70,6 +100,7 @@ public class UrlReaderTest {
 		assertEquals(resultCPMRC.getycen(),"39.4697979017582");
 		assertEquals(resultCPMRC.getldt(),"PZ AYUNTAMIENTO DEL 1 VALENCIA (VALENCIA)");
 	}
+	
 	
 
 }

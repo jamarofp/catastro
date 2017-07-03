@@ -1,6 +1,8 @@
 package com.jamaro.catastro.utils;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -53,7 +55,7 @@ public class OVCCoordenadas {
 		System.out.println(stUrl);
 		UrlReader urlReader = new UrlReader(stUrl);
 
-		String result = urlReader.getContent();
+		String resultContent = urlReader.getContent();
 		String txtResult = "";
 
 		Inmueble inmueble = new Inmueble();
@@ -62,11 +64,15 @@ public class OVCCoordenadas {
 			// https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(result.getBytes("utf-8"))));
+			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(resultContent.getBytes("utf-8"))));
 			doc.getDocumentElement().normalize();
+			
 			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+			
 			NodeList nList = doc.getElementsByTagName("coordenadas");//pcd");
+			
 			System.out.println("----------------------------");
+			
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				System.out.println("\nCurrent Element :" + nNode.getNodeName());
@@ -78,19 +84,11 @@ public class OVCCoordenadas {
 					System.out.println("ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent());
 					System.out.println("ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent());
 					
-					txtResult += "pc1 : " + eElement.getElementsByTagName("pc1").item(0).getTextContent() + "\n";
-					txtResult += "pc2 : " + eElement.getElementsByTagName("pc2").item(0).getTextContent() + "\n";
-					txtResult += "xcen : " + eElement.getElementsByTagName("xcen").item(0).getTextContent() + "\n";
-					txtResult += "ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent() + "\n";
-					txtResult += "ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent() + "\n";
-					
 					inmueble.setpc1(eElement.getElementsByTagName("pc1").item(0).getTextContent());
 					inmueble.setpc2(eElement.getElementsByTagName("pc2").item(0).getTextContent());
 					inmueble.setxcen(eElement.getElementsByTagName("xcen").item(0).getTextContent());
 					inmueble.setycen(eElement.getElementsByTagName("ycen").item(0).getTextContent());
 					inmueble.setldt(eElement.getElementsByTagName("ldt").item(0).getTextContent());
-					
-					
 					
 					
 				}
@@ -105,6 +103,63 @@ public class OVCCoordenadas {
 		return inmueble;
 	}
 
+	public List<Inmueble> getRCCOOR_Distancia() {
+		UrlConstructor urlConstructor = new UrlConstructor();
+		String stUrl = urlConstructor.RCCOOR_Distancia();
+		String coords = this.coords.replace(" ", "");
+		srs = (this.srs == null) ? SRS_GOOGLEMAPS : this.srs;
+		stUrl += "?SRS=" + this.srs + "&Coordenada_X=" + coords.split(",")[1] + "&Coordenada_Y=" + coords.split(",")[0];
+		System.out.println(stUrl);
+		UrlReader urlReader = new UrlReader(stUrl);
+
+		String resultContent = urlReader.getContent();
+		String txtResult = "";
+		List<Inmueble> inmuebleList = new ArrayList<Inmueble>();
+
+		
+		try {
+			// https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(resultContent.getBytes("utf-8"))));
+			doc.getDocumentElement().normalize();
+			
+			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+			
+			NodeList nList = doc.getElementsByTagName("pcd");//pcd");
+			
+			System.out.println("----------------------------");
+			System.out.println(nList.getLength());
+			System.out.println("----------------------------");
+			
+			
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+				Inmueble inmueble = new Inmueble();
+
+				Node nNode = nList.item(temp);
+				System.out.println("\nCurrent Element :" + nNode.getNodeName());
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					System.out.println("pc1 : " + eElement.getElementsByTagName("pc1").item(0).getTextContent());
+					System.out.println("pc2 : " + eElement.getElementsByTagName("pc2").item(0).getTextContent());
+					System.out.println("ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent());
+					System.out.println("dis : " + eElement.getElementsByTagName("dis").item(0).getTextContent());
+					
+					inmueble.setpc1(eElement.getElementsByTagName("pc1").item(0).getTextContent());
+					inmueble.setpc2(eElement.getElementsByTagName("pc2").item(0).getTextContent());
+					inmueble.setldt(eElement.getElementsByTagName("ldt").item(0).getTextContent());
+					inmueble.setdis(eElement.getElementsByTagName("dis").item(0).getTextContent());
+					
+					inmuebleList.add(inmueble);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return inmuebleList;
+	}
+	
 	public Inmueble getCPMRC() {
 		UrlConstructor urlConstructor = new UrlConstructor();
 		String stUrl = urlConstructor.CPMRC();
@@ -113,7 +168,7 @@ public class OVCCoordenadas {
 		System.out.println(stUrl);
 		UrlReader urlReader = new UrlReader(stUrl);
 
-		String result = urlReader.getContent();
+		String resultContent = urlReader.getContent();
 		String txtResult = "";
 		
 		Inmueble inmueble = new Inmueble();
@@ -122,7 +177,7 @@ public class OVCCoordenadas {
 			// https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(result.getBytes("utf-8"))));
+			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(resultContent.getBytes("utf-8"))));
 			doc.getDocumentElement().normalize();
 			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 			NodeList nList = doc.getElementsByTagName("coordenadas");//pcd");
@@ -162,5 +217,7 @@ public class OVCCoordenadas {
 		//return txtResult;
 		return inmueble;
 	}
+
+
 
 }
