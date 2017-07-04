@@ -21,9 +21,9 @@ public class CallejeroTest {
 	@Test
 	public void testOVCCallejero_List() {
 		
-		OVCCallejero callejero = new OVCCallejero();
+		Provincia prov = new Provincia();
 	
-		List<Provincia> provinciasList = callejero.List();
+		List<Provincia> provinciasList = prov.List();
 		
 		assertEquals(provinciasList.get(0).getCodigo_ine_provincia(),"15");
 		assertEquals(provinciasList.get(0).getNombre_provincia(),"A CORUÑA");
