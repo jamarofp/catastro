@@ -76,7 +76,9 @@ public class UrlConstructor {
 	
 	
 	
-	
+	public static int getLineNumber() {
+	    return Thread.currentThread().getStackTrace()[2].getLineNumber();
+	}
 	
 	private void sop(String st){
 		if (DEBUG) {
