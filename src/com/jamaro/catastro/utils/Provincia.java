@@ -18,6 +18,8 @@ public class Provincia {
 		this.nombre_provincia = nombre_provincia;
 	}
 	
-	
+	public String toString() {
+		return "CPINE: " + this.codigo_ine_provincia + " NP: " + this.nombre_provincia;
+	}
 
 }
