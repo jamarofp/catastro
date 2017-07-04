@@ -56,7 +56,6 @@ public class OVCCoordenadas {
 		UrlReader urlReader = new UrlReader(stUrl);
 
 		String resultContent = urlReader.getContent();
-		String txtResult = "";
 
 		Inmueble inmueble = new Inmueble();
 		
@@ -99,7 +98,7 @@ public class OVCCoordenadas {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println(inmueble.toString());
 		System.out.println("------------------------------------------------------------------------");
-		//return txtResult;
+
 		return inmueble;
 	}
 
@@ -113,7 +112,6 @@ public class OVCCoordenadas {
 		UrlReader urlReader = new UrlReader(stUrl);
 
 		String resultContent = urlReader.getContent();
-		String txtResult = "";
 		List<Inmueble> inmuebleList = new ArrayList<Inmueble>();
 
 		
@@ -169,7 +167,6 @@ public class OVCCoordenadas {
 		UrlReader urlReader = new UrlReader(stUrl);
 
 		String resultContent = urlReader.getContent();
-		String txtResult = "";
 		
 		Inmueble inmueble = new Inmueble();
 
@@ -193,12 +190,6 @@ public class OVCCoordenadas {
 					System.out.println("ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent());
 					System.out.println("ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent());
 					
-					txtResult += "pc1 : " + eElement.getElementsByTagName("pc1").item(0).getTextContent() + "\n";
-					txtResult += "pc2 : " + eElement.getElementsByTagName("pc2").item(0).getTextContent() + "\n";
-					txtResult += "xcen : " + eElement.getElementsByTagName("xcen").item(0).getTextContent() + "\n";
-					txtResult += "ycen : " + eElement.getElementsByTagName("ycen").item(0).getTextContent() + "\n";
-					txtResult += "ldt : " + eElement.getElementsByTagName("ldt").item(0).getTextContent() + "\n";
-					
 					inmueble.setpc1(eElement.getElementsByTagName("pc1").item(0).getTextContent());
 					inmueble.setpc2(eElement.getElementsByTagName("pc2").item(0).getTextContent());
 					inmueble.setxcen(eElement.getElementsByTagName("xcen").item(0).getTextContent());
@@ -214,7 +205,7 @@ public class OVCCoordenadas {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println(inmueble.toString());
 		System.out.println("------------------------------------------------------------------------");
-		//return txtResult;
+
 		return inmueble;
 	}
 
