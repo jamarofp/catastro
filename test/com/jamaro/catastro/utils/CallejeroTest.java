@@ -78,4 +78,19 @@ public class CallejeroTest {
 		assertEquals(municipiosList.get(6).getNombre_municipio(), "LA POBLA DE FARNALS");
 		
 	}
+	
+	@Test
+	public void testViaList_for_VALENCIA_TORRENT_with_HER_string() {
+		String provincia = "VALENCIA";
+		String municipio = "TORRENT";
+		String via_string_to_search = "HER";
+		
+		Via via = new Via(provincia, municipio, via_string_to_search);
+		
+		List<Via> viasList = via.List();
+		
+		assertEquals(viasList.get(0).getNombre_via(), "EMILIANO FDEZ HERRAIZ");
+		assertEquals(viasList.get(6).getNombre_via(), "SANT HERMENEGILD");
+		
+	}
 }
