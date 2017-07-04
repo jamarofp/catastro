@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class UrlReader {
+	static final boolean DEBUG = false;
+	
 	private String url_to_read;
 	
 	public UrlReader(String url_to_read){
@@ -20,12 +22,18 @@ public class UrlReader {
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			while ((inputLine = in.readLine()) != null) {
 			     inputText = inputText + inputLine;
-			     System.out.println(inputLine);
+			     sop(inputLine);
 			}
 		} catch(Throwable t){
 			System.out.println(t.getMessage());
 		}
 		return inputText;
+	}
+	
+	private void sop(String st){
+		if (DEBUG) {
+			System.out.println(st);
+		}
 	}
 
 }

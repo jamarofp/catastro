@@ -52,17 +52,14 @@ public class Provincia {
 			Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(resultContent.getBytes("utf-8"))));
 			doc.getDocumentElement().normalize();
 			
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 			
 			NodeList nList = doc.getElementsByTagName("prov");
 			
-			System.out.println("----------------------------");
 			
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Provincia prov = new Provincia();
 				
 				Node nNode = nList.item(temp);
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					System.out.println("cepine : " + eElement.getElementsByTagName("cpine").item(0).getTextContent());
