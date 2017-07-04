@@ -112,4 +112,5 @@ public class CallejeroTest {
 		assertEquals(viasList.get(2).getNombre_via(), "SANTANDERINA");
 		
 	}
+
 }
